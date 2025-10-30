@@ -8,7 +8,9 @@ app_license = "mit"
 # Apps
 # ------------------
 
-# required_apps = []
+# required_apps = [
+#     "frappe/erpnext"
+# ]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -26,7 +28,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/invoicing/css/invoicing.css"
-# app_include_js = "/assets/invoicing/js/invoicing.js"
+# app_include_js = "/assets/invoicing/js/main.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/invoicing/css/invoicing.css"
@@ -60,9 +62,10 @@ app_license = "mit"
 # home_page = "login"
 
 # website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
+role_home_page = {
+	"Sales User": "/app/sales-invoice",
+	"Purchase User": "/app/purchase-invoice"
+}
 
 # Generators
 # ----------
@@ -133,32 +136,22 @@ app_license = "mit"
 # Hook on document methods and events
 
 # doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
+# 	"Sales Invoice": {
+# 		"on_update": ["invoicing.invoicing.doctype.invoice.invoice.update_stock"
+#                 , "invoicing.invoicing.doctype.invoice.invoice.update_ledger"
+#                 ],
+#     	}
 # }
 
 # Scheduled Tasks
 # ---------------
 
 # scheduler_events = {
-# 	"all": [
-# 		"invoicing.tasks.all"
-# 	],
-# 	"daily": [
-# 		"invoicing.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"invoicing.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"invoicing.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"invoicing.tasks.monthly"
-# 	],
+# 	"cron": {
+#         "0 20 * * 3": [
+#             "invoicing.tasks.weekly_task"
+# 		]
+# 	}
 # }
 
 # Testing
@@ -178,7 +171,7 @@ app_license = "mit"
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "invoicing.event.get_events"
+# 	"erpnext.pos.invoice.finalise": "invoicing.finalise"
 # }
 #
 # each overriding function accepts a `data` argument;

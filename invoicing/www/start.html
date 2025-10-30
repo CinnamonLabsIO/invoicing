@@ -1,0 +1,18 @@
+{% extends "templates/web.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/assets/invoicing/css/main.css">
+
+<h1>Start</h1>
+
+{{ my_message }}
+
+Color: {{ color }}
+
+<div>
+	<button class="btn btn-primary">
+		My Button
+	</button>
+</div>
+<p>Invoice Count: {{ invoice_count }}</p>
+{% endblock %}
